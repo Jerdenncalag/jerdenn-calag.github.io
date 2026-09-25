@@ -3,172 +3,290 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Jerdenn Calag — Systems Administrator</title>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Fira+Code:wght@300;400;500&display=swap" rel="stylesheet">
+<title>Jerdenn Calag — Systems Administrator & Full-Stack Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Fira+Code:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #0d0d0d;
-  --surface: rgba(255,255,255,0.04);
-  --surface2: rgba(255,255,255,0.07);
-  --border: rgba(255,255,255,0.08);
-  --border2: rgba(255,255,255,0.15);
+  --bg: #07080a;
+  --surface: rgba(255, 255, 255, 0.03);
+  --surface-hover: rgba(255, 255, 255, 0.06);
+  --surface2: rgba(255, 255, 255, 0.07);
+  --border: rgba(255, 255, 255, 0.08);
+  --border-hover: rgba(167, 139, 250, 0.3);
   --p1: #a78bfa;   /* violet */
   --p2: #f472b6;   /* pink */
   --p3: #fb923c;   /* orange */
   --g1: #34d399;   /* emerald */
-  --text: #f1f5f9;
+  --text: #f8fafc;
   --muted: #94a3b8;
   --muted2: #475569;
   --sans: 'Plus Jakarta Sans', sans-serif;
   --mono: 'Fira Code', monospace;
 }
-*{margin:0;padding:0;box-sizing:border-box;}
-html{scroll-behavior:smooth;}
-body{background:var(--bg);color:var(--text);font-family:var(--sans);overflow-x:hidden;}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: var(--sans); overflow-x: hidden; line-height: 1.6; }
 
 /* ── NOISE TEXTURE ── */
-body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:0.4;}
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.025'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 999;
+}
 
-/* ── GRADIENT ORBS ── */
-.orb{position:fixed;border-radius:50%;filter:blur(80px);pointer-events:none;z-index:0;}
-.orb1{width:600px;height:600px;background:radial-gradient(circle,rgba(167,139,250,0.12) 0%,transparent 70%);top:-200px;right:-100px;}
-.orb2{width:500px;height:500px;background:radial-gradient(circle,rgba(244,114,182,0.08) 0%,transparent 70%);bottom:20%;left:-150px;}
-.orb3{width:400px;height:400px;background:radial-gradient(circle,rgba(251,146,60,0.07) 0%,transparent 70%);top:50%;right:10%;}
+/* ── AMBIENT ORBS ── */
+.orb { position: fixed; border-radius: 50%; filter: blur(100px); pointer-events: none; z-index: 0; }
+.orb1 { width: 650px; height: 650px; background: radial-gradient(circle, rgba(167, 139, 250, 0.1) 0%, transparent 70%); top: -200px; right: -150px; }
+.orb2 { width: 550px; height: 550px; background: radial-gradient(circle, rgba(244, 114, 182, 0.07) 0%, transparent 70%); bottom: 10%; left: -200px; }
+.orb3 { width: 450px; height: 450px; background: radial-gradient(circle, rgba(52, 211, 153, 0.05) 0%, transparent 70%); top: 40%; right: 20%; }
 
-::-webkit-scrollbar{width:3px;}
-::-webkit-scrollbar-track{background:var(--bg);}
-::-webkit-scrollbar-thumb{background:var(--p1);border-radius:2px;}
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--muted2); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--p1); }
 
-/* ── NAV ── */
-nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.25rem 5rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);background:rgba(13,13,13,0.8);backdrop-filter:blur(20px);}
-.logo{font-family:var(--mono);font-size:0.82rem;color:var(--p1);}
-.logo em{color:var(--muted);font-style:normal;}
-.nav-links{display:flex;gap:2.5rem;}
-.nav-links a{font-size:0.82rem;color:var(--muted);text-decoration:none;letter-spacing:0.04em;transition:color 0.2s;font-weight:500;}
-.nav-links a:hover{color:var(--text);}
-.avail{display:flex;align-items:center;gap:0.5rem;font-size:0.75rem;color:var(--g1);font-family:var(--mono);}
-.dot{width:6px;height:6px;border-radius:50%;background:var(--g1);animation:blink 2s infinite;}
-@keyframes blink{0%,100%{opacity:1;}50%{opacity:0.2;}}
+/* ── NAVIGATION ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 1.25rem 5rem;
+  display: flex; align-items: center; justify-content: space-between;
+  border-bottom: 1px solid var(--border);
+  background: rgba(7, 8, 10, 0.85);
+  backdrop-filter: blur(20px);
+}
+.logo { font-family: var(--mono); font-size: 0.88rem; font-weight: 600; color: var(--p1); text-decoration: none; display: flex; align-items: center; gap: 0.25rem; }
+.logo em { color: var(--muted); font-style: normal; }
+.nav-links { display: flex; gap: 2.5rem; align-items: center; }
+.nav-links a { font-size: 0.82rem; color: var(--muted); text-decoration: none; letter-spacing: 0.04em; transition: color 0.2s ease; font-weight: 500; }
+.nav-links a:hover { color: var(--text); }
+.nav-right { display: flex; align-items: center; gap: 1.5rem; }
+.avail { display: flex; align-items: center; gap: 0.5rem; font-size: 0.75rem; color: var(--g1); font-family: var(--mono); background: rgba(52, 211, 153, 0.08); padding: 0.35rem 0.85rem; border-radius: 100px; border: 1px solid rgba(52, 211, 153, 0.2); }
+.dot { width: 6px; height: 6px; border-radius: 50%; background: var(--g1); animation: blink 2s infinite; }
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.2; } }
 
-/* ── HERO ── */
-#hero{min-height:100vh;display:flex;align-items:center;padding:0 5rem;padding-top:80px;position:relative;z-index:1;}
-.hero-wrap{display:grid;grid-template-columns:1fr 420px;gap:4rem;align-items:center;width:100%;}
-.hero-badge{display:inline-flex;align-items:center;gap:0.5rem;padding:0.4rem 1rem;border:1px solid rgba(167,139,250,0.3);border-radius:100px;background:rgba(167,139,250,0.07);font-family:var(--mono);font-size:0.7rem;color:var(--p1);margin-bottom:1.5rem;opacity:0;animation:up 0.5s 0.1s forwards;}
-.hero-badge span{width:5px;height:5px;border-radius:50%;background:var(--p1);}
-h1.name{font-size:clamp(3rem,6vw,5rem);font-weight:800;line-height:1.05;letter-spacing:-0.03em;margin-bottom:1rem;opacity:0;animation:up 0.5s 0.25s forwards;}
-h1.name .grad{background:linear-gradient(135deg,var(--p1),var(--p2),var(--p3));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-.hero-role{font-family:var(--mono);font-size:0.9rem;color:var(--p1);margin-bottom:1.5rem;opacity:0;animation:up 0.5s 0.4s forwards;}
-.hero-desc{font-size:1rem;color:var(--muted);line-height:1.8;max-width:520px;margin-bottom:2.5rem;opacity:0;animation:up 0.5s 0.55s forwards;}
-.hero-btns{display:flex;gap:1rem;opacity:0;animation:up 0.5s 0.7s forwards;}
-.btn-main{padding:0.85rem 2rem;background:linear-gradient(135deg,var(--p1),var(--p2));color:#fff;border:none;border-radius:8px;font-family:var(--sans);font-size:0.85rem;font-weight:700;cursor:pointer;text-decoration:none;transition:opacity 0.2s,transform 0.2s;}
-.btn-main:hover{opacity:0.85;transform:translateY(-2px);}
-.btn-out{padding:0.85rem 2rem;background:transparent;color:var(--text);border:1px solid var(--border2);border-radius:8px;font-size:0.85rem;font-weight:600;cursor:pointer;text-decoration:none;transition:border-color 0.2s,transform 0.2s;}
-.btn-out:hover{border-color:var(--p1);transform:translateY(-2px);}
+.menu-toggle { display: none; background: none; border: none; color: var(--text); font-size: 1.5rem; cursor: pointer; }
 
-/* Hero card */
-.hero-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;overflow:hidden;opacity:0;animation:left 0.7s 0.9s forwards;}
-.hc-header{padding:0.85rem 1.25rem;background:var(--surface2);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:0.5rem;}
-.hc-dot{width:10px;height:10px;border-radius:50%;}
-.hc-title{font-family:var(--mono);font-size:0.68rem;color:var(--muted);margin-left:auto;}
-.hc-body{padding:1.25rem;font-family:var(--mono);font-size:0.72rem;line-height:2;}
-.c-p{color:var(--p1);}
-.c-v{color:var(--text);}
-.c-s{color:var(--p2);}
-.c-g{color:var(--g1);}
-.c-o{color:var(--p3);}
-.c-m{color:var(--muted);}
-.blink{display:inline-block;width:7px;height:13px;background:var(--p1);vertical-align:middle;animation:bl 1s step-end infinite;}
-@keyframes bl{0%,100%{opacity:1;}50%{opacity:0;}}
+/* ── HERO SECTION ── */
+#hero {
+  min-height: 100vh; display: flex; align-items: center;
+  padding: 0 5rem; padding-top: 90px;
+  position: relative; z-index: 1;
+}
+.hero-wrap { display: grid; grid-template-columns: 1fr 440px; gap: 4rem; align-items: center; width: 100%; max-width: 1300px; margin: 0 auto; }
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0.4rem 1.1rem; border: 1px solid rgba(167, 139, 250, 0.3);
+  border-radius: 100px; background: rgba(167, 139, 250, 0.07);
+  font-family: var(--mono); font-size: 0.72rem; color: var(--p1);
+  margin-bottom: 1.5rem; opacity: 0; animation: up 0.6s 0.1s forwards;
+}
+.hero-badge span { width: 6px; height: 6px; border-radius: 50%; background: var(--p1); box-shadow: 0 0 10px var(--p1); }
 
-@keyframes up{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
-@keyframes left{from{opacity:0;transform:translateX(20px);}to{opacity:1;transform:translateX(0);}}
+h1.name {
+  font-size: clamp(3rem, 5.5vw, 4.8rem); font-weight: 800; line-height: 1.08;
+  letter-spacing: -0.03em; margin-bottom: 1.25rem;
+  opacity: 0; animation: up 0.6s 0.25s forwards;
+}
+h1.name .grad {
+  background: linear-gradient(135deg, var(--p1), var(--p2), var(--p3));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.hero-role { font-family: var(--mono); font-size: 0.92rem; color: var(--p1); margin-bottom: 1.5rem; opacity: 0; animation: up 0.6s 0.4s forwards; }
+.hero-desc { font-size: 1.02rem; color: var(--muted); line-height: 1.8; max-width: 540px; margin-bottom: 2.5rem; opacity: 0; animation: up 0.6s 0.55s forwards; }
+.hero-btns { display: flex; gap: 1rem; opacity: 0; animation: up 0.6s 0.7s forwards; }
 
-/* ── STATS ── */
-.stats{display:grid;grid-template-columns:repeat(4,1fr);position:relative;z-index:1;}
-.stat{padding:2.5rem;text-align:center;border-top:1px solid var(--border);border-right:1px solid var(--border);position:relative;overflow:hidden;}
-.stat:last-child{border-right:none;}
-.stat::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(167,139,250,0.03),transparent);pointer-events:none;}
-.stat-n{font-size:2.8rem;font-weight:800;background:linear-gradient(135deg,var(--p1),var(--p2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;}
-.stat-l{font-size:0.75rem;color:var(--muted);margin-top:0.4rem;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;}
+.btn-main {
+  padding: 0.9rem 2.2rem; background: linear-gradient(135deg, var(--p1), var(--p2));
+  color: #fff; border: none; border-radius: 10px; font-family: var(--sans);
+  font-size: 0.88rem; font-weight: 700; cursor: pointer; text-decoration: none;
+  transition: all 0.25s ease; box-shadow: 0 4px 20px rgba(167, 139, 250, 0.25);
+}
+.btn-main:hover { opacity: 0.9; transform: translateY(-2px); box-shadow: 0 6px 25px rgba(167, 139, 250, 0.4); }
+
+.btn-out {
+  padding: 0.9rem 2.2rem; background: var(--surface); color: var(--text);
+  border: 1px solid var(--border); border-radius: 10px; font-size: 0.88rem;
+  font-weight: 600; cursor: pointer; text-decoration: none; transition: all 0.25s ease;
+}
+.btn-out:hover { border-color: var(--p1); background: var(--surface-hover); transform: translateY(-2px); }
+
+/* Hero Terminal Card */
+.hero-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 18px; overflow: hidden; backdrop-filter: blur(10px);
+  opacity: 0; animation: left 0.8s 0.85s forwards;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+.hc-header { padding: 1rem 1.25rem; background: var(--surface2); border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 0.5rem; }
+.hc-dot { width: 10px; height: 10px; border-radius: 50%; }
+.hc-title { font-family: var(--mono); font-size: 0.7rem; color: var(--muted); margin-left: auto; }
+.hc-body { padding: 1.5rem; font-family: var(--mono); font-size: 0.76rem; line-height: 2.1; }
+.c-p { color: var(--p1); }
+.c-v { color: var(--text); }
+.c-s { color: var(--p2); }
+.c-g { color: var(--g1); }
+.c-o { color: var(--p3); }
+.c-m { color: var(--muted2); }
+.blink { display: inline-block; width: 7px; height: 14px; background: var(--p1); vertical-align: middle; animation: bl 1s step-end infinite; }
+@keyframes bl { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+@keyframes up { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes left { from { opacity: 0; transform: translateX(20px); } to { opacity: 1; transform: translateX(0); } }
+
+/* ── STATS BAR ── */
+.stats {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  max-width: 1300px; margin: 0 auto; padding: 0 5rem;
+  position: relative; z-index: 1; margin-top: -2rem;
+}
+.stat {
+  padding: 2rem; background: var(--surface);
+  border: 1px solid var(--border); border-right: none;
+  backdrop-filter: blur(10px); text-align: center; position: relative; overflow: hidden;
+  transition: border-color 0.3s;
+}
+.stat:first-child { border-radius: 12px 0 0 12px; }
+.stat:last-child { border-right: 1px solid var(--border); border-radius: 0 12px 12px 0; }
+.stat:hover { border-color: var(--border-hover); }
+.stat-n {
+  font-size: 2.6rem; font-weight: 800;
+  background: linear-gradient(135deg, var(--p1), var(--p2));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  line-height: 1; margin-bottom: 0.3rem;
+}
+.stat-l { font-size: 0.74rem; color: var(--muted); font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; }
 
 /* ── SECTIONS ── */
-.wrap{max-width:1200px;margin:0 auto;padding:6rem 5rem;position:relative;z-index:1;}
-.sec-eyebrow{font-family:var(--mono);font-size:0.72rem;color:var(--p1);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:0.75rem;}
-.sec-title{font-size:clamp(1.8rem,3vw,2.4rem);font-weight:800;letter-spacing:-0.02em;margin-bottom:0.5rem;}
-.sec-sub{color:var(--muted);font-size:0.95rem;line-height:1.7;margin-bottom:3rem;max-width:500px;}
-.divider{height:1px;background:var(--border);position:relative;z-index:1;}
+.wrap { max-width: 1300px; margin: 0 auto; padding: 6rem 5rem; position: relative; z-index: 1; }
+.sec-eyebrow { font-family: var(--mono); font-size: 0.72rem; color: var(--p1); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.75rem; font-weight: 600; }
+.sec-title { font-size: clamp(2rem, 3.5vw, 2.6rem); font-weight: 800; letter-spacing: -0.02em; margin-bottom: 0.75rem; }
+.sec-sub { color: var(--muted); font-size: 1rem; line-height: 1.7; margin-bottom: 3.5rem; max-width: 550px; }
+.divider { height: 1px; background: var(--border); max-width: 1300px; margin: 0 auto; position: relative; z-index: 1; }
 
-/* ── SKILLS ── */
-.skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;}
-.sk-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.75rem;transition:border-color 0.25s,transform 0.2s;}
-.sk-card:hover{border-color:var(--border2);transform:translateY(-3px);}
-.sk-icon{font-size:1.6rem;margin-bottom:1rem;}
-.sk-name{font-size:0.9rem;font-weight:700;margin-bottom:0.85rem;}
-.tags{display:flex;flex-wrap:wrap;gap:0.4rem;}
-.tag{font-family:var(--mono);font-size:0.62rem;padding:0.22rem 0.55rem;border-radius:4px;border:1px solid var(--border);color:var(--muted);letter-spacing:0.03em;}
-.tag.v{border-color:rgba(167,139,250,0.3);color:var(--p1);background:rgba(167,139,250,0.05);}
-.tag.p{border-color:rgba(244,114,182,0.3);color:var(--p2);background:rgba(244,114,182,0.05);}
-.tag.o{border-color:rgba(251,146,60,0.3);color:var(--p3);background:rgba(251,146,60,0.05);}
-.tag.g{border-color:rgba(52,211,153,0.3);color:var(--g1);background:rgba(52,211,153,0.05);}
+/* ── SKILLS SECTION ── */
+.skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+.sk-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 16px; padding: 2rem; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  backdrop-filter: blur(10px);
+}
+.sk-card:hover { border-color: var(--border-hover); transform: translateY(-4px); background: var(--surface-hover); box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+.sk-icon { font-size: 1.8rem; margin-bottom: 1.25rem; }
+.sk-name { font-size: 1.05rem; font-weight: 700; margin-bottom: 1rem; color: var(--text); }
+.tags { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+.tag {
+  font-family: var(--mono); font-size: 0.65rem; padding: 0.28rem 0.65rem;
+  border-radius: 6px; border: 1px solid var(--border); color: var(--muted);
+  letter-spacing: 0.03em; background: rgba(255, 255, 255, 0.02); transition: all 0.2s;
+}
+.tag:hover { color: var(--text); border-color: var(--muted2); }
+.tag.v { border-color: rgba(167, 139, 250, 0.3); color: var(--p1); background: rgba(167, 139, 250, 0.06); }
+.tag.p { border-color: rgba(244, 114, 182, 0.3); color: var(--p2); background: rgba(244, 114, 182, 0.06); }
+.tag.o { border-color: rgba(251, 146, 60, 0.3); color: var(--p3); background: rgba(251, 146, 60, 0.06); }
+.tag.g { border-color: rgba(52, 211, 153, 0.3); color: var(--g1); background: rgba(52, 211, 153, 0.06); }
 
-/* ── PROJECTS ── */
-.proj-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.25rem;}
-.proj-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.75rem;transition:border-color 0.25s,transform 0.2s;cursor:default;}
-.proj-card:hover{border-color:var(--border2);transform:translateY(-3px);}
-.proj-card.big{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:start;}
-.proj-num{font-family:var(--mono);font-size:0.65rem;color:var(--muted2);margin-bottom:0.85rem;letter-spacing:0.08em;}
-.proj-title{font-size:1.1rem;font-weight:700;margin-bottom:0.65rem;line-height:1.3;}
-.proj-desc{font-size:0.83rem;color:var(--muted);line-height:1.75;margin-bottom:1.1rem;}
-.proj-tags{display:flex;flex-wrap:wrap;gap:0.4rem;}
-.proj-visual{background:rgba(0,0,0,0.3);border:1px solid var(--border);border-radius:8px;padding:1.25rem;font-family:var(--mono);font-size:0.68rem;line-height:1.9;}
+/* ── PROJECTS SECTION ── */
+.proj-filters { display: flex; gap: 0.75rem; margin-bottom: 2.5rem; flex-wrap: wrap; }
+.filter-btn {
+  font-family: var(--mono); font-size: 0.72rem; padding: 0.5rem 1.25rem;
+  border-radius: 8px; border: 1px solid var(--border); background: var(--surface);
+  color: var(--muted); cursor: pointer; transition: all 0.2s; font-weight: 500;
+}
+.filter-btn:hover, .filter-btn.active { border-color: var(--p1); color: var(--text); background: rgba(167, 139, 250, 0.08); }
 
-/* ── EXPERIENCE ── */
-.exp-list{display:flex;flex-direction:column;}
-.exp-row{display:grid;grid-template-columns:180px 1fr;gap:3rem;padding:2.5rem 0;border-bottom:1px solid var(--border);}
-.exp-left{}
-.exp-date{font-family:var(--mono);font-size:0.7rem;color:var(--muted);line-height:1.7;}
-.exp-badge{display:inline-block;margin-top:0.6rem;padding:0.2rem 0.6rem;border-radius:4px;font-size:0.65rem;font-family:var(--mono);font-weight:600;}
-.exp-badge.remote{background:rgba(167,139,250,0.1);color:var(--p1);border:1px solid rgba(167,139,250,0.2);}
-.exp-badge.onsite{background:rgba(52,211,153,0.1);color:var(--g1);border:1px solid rgba(52,211,153,0.2);}
-.exp-co{font-size:0.72rem;font-family:var(--mono);color:var(--p1);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.3rem;}
-.exp-role{font-size:1.15rem;font-weight:700;margin-bottom:0.85rem;}
-.exp-buls{list-style:none;display:flex;flex-direction:column;gap:0.5rem;}
-.exp-buls li{font-size:0.85rem;color:var(--muted);line-height:1.65;padding-left:1.1rem;position:relative;}
-.exp-buls li::before{content:'→';position:absolute;left:0;color:var(--p1);font-size:0.75rem;}
+.proj-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+.proj-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 16px; padding: 2.25rem; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex; flex-direction: column; justify-content: space-between;
+  backdrop-filter: blur(10px); position: relative; overflow: hidden;
+}
+.proj-card:hover { border-color: var(--border-hover); transform: translateY(-4px); background: var(--surface-hover); box-shadow: 0 15px 35px rgba(0,0,0,0.4); }
+.proj-card.big { grid-column: 1 / -1; display: grid; grid-template-columns: 1.2fr 1fr; gap: 2.5rem; align-items: center; }
+.proj-num { font-family: var(--mono); font-size: 0.68rem; color: var(--p1); margin-bottom: 1rem; letter-spacing: 0.1em; font-weight: 600; }
+.proj-title { font-size: 1.25rem; font-weight: 700; margin-bottom: 0.85rem; line-height: 1.35; }
+.proj-desc { font-size: 0.88rem; color: var(--muted); line-height: 1.8; margin-bottom: 1.5rem; }
+.proj-tags { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-top: auto; }
+.proj-visual {
+  background: rgba(0, 0, 0, 0.4); border: 1px solid var(--border);
+  border-radius: 12px; padding: 1.5rem; font-family: var(--mono);
+  font-size: 0.72rem; line-height: 2; box-shadow: inset 0 2px 10px rgba(0,0,0,0.5);
+}
 
-/* ── CONTACT ── */
-#contact{background:linear-gradient(135deg,rgba(167,139,250,0.04),rgba(244,114,182,0.03));}
-.contact-wrap{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;}
-.contact-links{display:flex;flex-direction:column;gap:0.85rem;}
-.c-link{display:flex;align-items:center;gap:1rem;padding:1rem 1.25rem;background:var(--surface);border:1px solid var(--border);border-radius:10px;text-decoration:none;transition:border-color 0.2s,transform 0.2s;}
-.c-link:hover{border-color:var(--p1);transform:translateX(5px);}
-.c-ico{font-size:1.2rem;width:36px;text-align:center;}
-.c-label{font-family:var(--mono);font-size:0.65rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:0.15rem;}
-.c-val{font-size:0.85rem;color:var(--text);font-weight:500;}
+/* ── EXPERIENCE SECTION ── */
+.exp-list { display: flex; flex-direction: column; gap: 2rem; }
+.exp-row {
+  display: grid; grid-template-columns: 200px 1fr; gap: 3.5rem;
+  padding: 2.5rem; background: var(--surface); border: 1px solid var(--border);
+  border-radius: 16px; transition: border-color 0.3s; backdrop-filter: blur(10px);
+}
+.exp-row:hover { border-color: var(--border-hover); }
+.exp-date { font-family: var(--mono); font-size: 0.72rem; color: var(--muted); line-height: 1.6; }
+.exp-badge {
+  display: inline-block; margin-top: 0.75rem; padding: 0.25rem 0.75rem;
+  border-radius: 6px; font-size: 0.68rem; font-family: var(--mono); font-weight: 600;
+}
+.exp-badge.remote { background: rgba(167, 139, 250, 0.1); color: var(--p1); border: 1px solid rgba(167, 139, 250, 0.25); }
+.exp-badge.onsite { background: rgba(52, 211, 153, 0.1); color: var(--g1); border: 1px solid rgba(52, 211, 153, 0.25); }
+.exp-co { font-size: 0.75rem; font-family: var(--mono); color: var(--p1); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.35rem; font-weight: 600; }
+.exp-role { font-size: 1.25rem; font-weight: 700; margin-bottom: 1.25rem; }
+.exp-buls { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
+.exp-buls li { font-size: 0.88rem; color: var(--muted); line-height: 1.7; padding-left: 1.25rem; position: relative; }
+.exp-buls li::before { content: '→'; position: absolute; left: 0; color: var(--p1); font-weight: bold; }
+
+/* ── CONTACT SECTION ── */
+#contact { background: linear-gradient(135deg, rgba(167, 139, 250, 0.04), rgba(244, 114, 182, 0.02)); border-top: 1px solid var(--border); }
+.contact-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+.contact-links { display: flex; flex-direction: column; gap: 1rem; }
+.c-link {
+  display: flex; align-items: center; gap: 1.25rem; padding: 1.25rem 1.5rem;
+  background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+  text-decoration: none; transition: all 0.25s ease; backdrop-filter: blur(10px);
+}
+.c-link:hover { border-color: var(--p1); transform: translateX(6px); background: var(--surface-hover); }
+.c-ico { font-size: 1.4rem; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.03); border-radius: 8px; border: 1px solid var(--border); }
+.c-label { font-family: var(--mono); font-size: 0.68rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.2rem; }
+.c-val { font-size: 0.9rem; color: var(--text); font-weight: 600; }
 
 /* ── FOOTER ── */
-footer{border-top:1px solid var(--border);padding:2rem 5rem;display:flex;justify-content:space-between;align-items:center;position:relative;z-index:1;}
-.ft{font-family:var(--mono);font-size:0.7rem;color:var(--muted2);}
-.ft span{color:var(--p1);}
+footer { border-top: 1px solid var(--border); padding: 2.5rem 5rem; display: flex; justify-content: space-between; align-items: center; position: relative; z-index: 1; max-width: 1300px; margin: 0 auto; }
+.ft { font-family: var(--mono); font-size: 0.72rem; color: var(--muted2); }
+.ft span { color: var(--p1); }
 
-/* ── REVEAL ── */
-.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.55s,transform 0.55s;}
-.reveal.visible{opacity:1;transform:translateY(0);}
+/* ── REVEAL ANIMATIONS ── */
+.reveal { opacity: 0; transform: translateY(25px); transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
 
-/* ── MOBILE ── */
-@media(max-width:900px){
-  nav{padding:1rem 1.5rem;}
-  .nav-links{display:none;}
-  #hero{padding:5rem 1.5rem 3rem;}
-  .hero-wrap{grid-template-columns:1fr;}
-  .hero-card{display:none;}
-  .wrap{padding:4rem 1.5rem;}
-  .stats{grid-template-columns:repeat(2,1fr);}
-  .skills-grid,.proj-grid{grid-template-columns:1fr;}
-  .proj-card.big{grid-template-columns:1fr;}
-  .exp-row{grid-template-columns:1fr;gap:0.5rem;}
-  .contact-wrap{grid-template-columns:1fr;gap:2rem;}
-  footer{padding:1.5rem;flex-direction:column;gap:0.5rem;text-align:center;}
+/* ── MOBILE RESPONSIVE ── */
+@media(max-width: 1024px) {
+  nav { padding: 1rem 2rem; }
+  #hero, .stats, .wrap, footer { padding-left: 2rem; padding-right: 2rem; }
+  .hero-wrap, .contact-wrap, .proj-card.big { grid-template-columns: 1fr; gap: 3rem; }
+  .hero-card { display: block; }
+  .skills-grid, .proj-grid { grid-template-columns: 1fr; }
+  .exp-row { grid-template-columns: 1fr; gap: 1rem; }
+  .stats { grid-template-columns: repeat(2, 1fr); margin-top: 0; }
+  .stat:first-child { border-radius: 12px 0 0 0; }
+  .stat:nth-child(2) { border-radius: 0 12px 0 0; border-right: 1px solid var(--border); }
+  .stat:nth-child(3) { border-radius: 0 0 0 12px; }
+  .stat:last-child { border-radius: 0 0 12px 0; }
+}
+
+@media(max-width: 768px) {
+  .nav-links {
+    position: fixed; top: 70px; left: 0; right: 0; background: rgba(7, 8, 10, 0.95);
+    backdrop-filter: blur(20px); flex-direction: column; padding: 2rem;
+    border-bottom: 1px solid var(--border); transform: translateY(-150%);
+    transition: transform 0.3s ease; gap: 1.5rem; z-index: 99;
+  }
+  .nav-links.active { transform: translateY(0); }
+  .menu-toggle { display: block; }
+  .stats { grid-template-columns: 1fr; }
+  .stat { border-radius: 0 !important; border-right: 1px solid var(--border) !important; }
 }
 </style>
 </head>
@@ -178,26 +296,29 @@ footer{border-top:1px solid var(--border);padding:2rem 5rem;display:flex;justify
 <div class="orb orb2"></div>
 <div class="orb orb3"></div>
 
-<!-- NAV -->
+<!-- NAVIGATION -->
 <nav>
-  <div class="logo"><em>~/</em>jerdenn<span style="color:var(--p1)">_</span>calag</div>
-  <div class="nav-links">
+  <a href="#" class="logo"><em>~/</em>jerdenn<span style="color:var(--p1)">_</span>calag</a>
+  <div class="nav-links" id="navLinks">
     <a href="#skills">Skills</a>
     <a href="#projects">Projects</a>
     <a href="#experience">Experience</a>
     <a href="#contact">Contact</a>
   </div>
-  <div class="avail"><div class="dot"></div>Open to work</div>
+  <div class="nav-right">
+    <div class="avail"><div class="dot"></div>Open to Work</div>
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle Menu">☰</button>
+  </div>
 </nav>
 
-<!-- HERO -->
+<!-- HERO SECTION -->
 <section id="hero">
   <div class="hero-wrap">
     <div>
-      <div class="hero-badge"><span></span>Systems Administrator · IT Specialist</div>
+      <div class="hero-badge"><span></span>Systems Administrator · Full-Stack & AI Engineer</div>
       <h1 class="name">Jerdenn<br><span class="grad">Calag</span></h1>
-      <div class="hero-role">$ sysadmin --cloud --voip --security --automation</div>
-      <p class="hero-desc">I keep IT infrastructure running, secured, and documented across multi-brand cloud environments — from 12-server Linode fleets to VoIP systems, DLP solutions, and custom helpdesk AI integrations.</p>
+      <div class="hero-role">$ sysadmin --cloud --ai --nextjs --security</div>
+      <p class="hero-desc">Building resilient cloud infrastructure, multi-tenant AI platforms, internal CRMs, and robust retail low-voltage security deployments across remote operations[span_21](start_span)[span_21](end_span).</p>
       <div class="hero-btns">
         <a href="#projects" class="btn-main">View Projects</a>
         <a href="#contact" class="btn-out">Get in Touch</a>
@@ -213,16 +334,12 @@ footer{border-top:1px solid var(--border);padding:2rem 5rem;display:flex;justify
       <div class="hc-body">
         <div><span class="c-p">jerdenn</span><span class="c-m">@gosafer</span><span class="c-v">:~$ </span><span class="c-v">neofetch --mini</span></div>
         <div class="c-m">──────────────────────</div>
-        <div><span class="c-p">role</span>      <span class="c-v">SysAdmin / IT Specialist</span></div>
-        <div><span class="c-p">org</span>       <span class="c-v">Gosafer Corp (3 brands)</span></div>
-        <div><span class="c-p">location</span>  <span class="c-v">Compostela, PH · Remote</span></div>
-        <div><span class="c-p">servers</span>   <span class="c-g">12x Linode VPS</span></div>
-        <div><span class="c-p">apps</span>      <span class="c-g">48+ (Cloudron)</span></div>
-        <div><span class="c-p">uptime</span>    <span class="c-g">99.9%</span></div>
-        <div class="c-m">──────────────────────</div>
-        <div><span class="c-p">stack</span>     <span class="c-s">Linux · Docker · Nginx</span></div>
-        <div>          <span class="c-s">Grafana · 3CX · n8n</span></div>
-        <div>          <span class="c-s">GWS · Intune · Telnyx · Twilio</span></div>
+        <div><span class="c-p">role</span>      <span class="c-v">SysAdmin / Full-Stack Dev</span>[span_22](start_span)[span_22](end_span)</div>
+        <div><span class="c-p">org</span>       <span class="c-v">Gosafer Corp & Brands</span>[span_23](start_span)[span_23](end_span)</div>
+        <div><span class="c-p">location</span>  <span class="c-v">Compostela, PH · Remote</span>[span_24](start_span)[span_24](end_span)</div>
+        <div><span class="c-p">servers</span>   <span class="c-g">12x Linode VPS</span>[span_25](start_span)[span_25](end_span)</div>
+        <div><span class="c-p">stack</span>     <span class="c-s">Next.js 15 · NestJS · Drizzle</span></div>
+        <div>          <span class="c-s">OpenAI API · Redis · PostgreSQL</span></div>
         <div class="c-m">──────────────────────</div>
         <div><span class="c-v">jerdenn@gosafer:~$ </span><span class="blink"></span></div>
       </div>
@@ -230,297 +347,10 @@ footer{border-top:1px solid var(--border);padding:2rem 5rem;display:flex;justify
   </div>
 </section>
 
-<!-- STATS -->
+<!-- STATS BAR -->
 <div class="stats">
-  <div class="stat reveal"><div class="stat-n">12</div><div class="stat-l">VPS Servers</div></div>
-  <div class="stat reveal"><div class="stat-n">48+</div><div class="stat-l">Hosted Apps</div></div>
-  <div class="stat reveal"><div class="stat-n">300+</div><div class="stat-l">GB Migrated</div></div>
-  <div class="stat reveal"><div class="stat-n">3</div><div class="stat-l">Brands Managed</div></div>
-</div>
-
-<!-- SKILLS -->
-<section id="skills">
-  <div class="wrap">
-    <div class="sec-eyebrow reveal">02 · Skills</div>
-    <h2 class="sec-title reveal">What I Work With</h2>
-    <p class="sec-sub reveal">Tools and platforms I manage daily across production environments.</p>
-    <div class="skills-grid">
-      <div class="sk-card reveal">
-        <div class="sk-icon">🖥️</div>
-        <div class="sk-name">Cloud & Servers</div>
-        <div class="tags">
-          <span class="tag v">Linode / Akamai</span><span class="tag">Ubuntu / Debian</span><span class="tag">Cloudron</span><span class="tag">Docker</span><span class="tag">Nginx</span><span class="tag">Apache</span><span class="tag">PM2</span><span class="tag">SSL/TLS</span><span class="tag g">VirtualBox</span>
-        </div>
-      </div>
-      <div class="sk-card reveal">
-        <div class="sk-icon">📊</div>
-        <div class="sk-name">Monitoring & Observability</div>
-        <div class="tags">
-          <span class="tag v">Prometheus</span><span class="tag v">Grafana</span><span class="tag">Loki</span><span class="tag">Promtail</span><span class="tag">Alertmanager</span><span class="tag">Telegram Alerts</span>
-        </div>
-      </div>
-      <div class="sk-card reveal">
-        <div class="sk-icon">🔒</div>
-        <div class="sk-name">Security & DLP</div>
-        <div class="tags">
-          <span class="tag p">Bitdefender GravityZone</span><span class="tag p">Kickidler DLP</span><span class="tag">UFW / iptables</span><span class="tag">fail2ban</span><span class="tag">SSH Hardening</span><span class="tag">Phishing Simulation</span>
-        </div>
-      </div>
-      <div class="sk-card reveal">
-        <div class="sk-icon">📞</div>
-        <div class="sk-name">VoIP & Messaging</div>
-        <div class="tags">
-          <span class="tag g">3CX PBX</span><span class="tag g">Telnyx SIP</span><span class="tag g">Twilio</span><span class="tag">Audio · SMS · WhatsApp</span><span class="tag">IVR / DID Routing</span><span class="tag">Yealink / Wildix</span><span class="tag">RingCentral</span><span class="tag">10DLC</span>
-        </div>
-      </div>
-      <div class="sk-card reveal">
-        <div class="sk-icon">📧</div>
-        <div class="sk-name">Email & Collaboration</div>
-        <div class="tags">
-          <span class="tag v">Google Workspace</span><span class="tag">Microsoft 365</span><span class="tag v">Microsoft Intune</span><span class="tag">SharePoint Migration</span><span class="tag">SPF/DKIM/DMARC</span><span class="tag">FreeScout</span>
-        </div>
-      </div>
-      <div class="sk-card reveal">
-        <div class="sk-icon">⚙️</div>
-        <div class="sk-name">Automation & Dev</div>
-        <div class="tags">
-          <span class="tag o">n8n</span><span class="tag o">Pabbly Connect</span><span class="tag">Bash / Python</span><span class="tag">Node.js</span><span class="tag">Apps Script</span><span class="tag">REST APIs</span><span class="tag o">ScribeHow</span><span class="tag g">Tailscale</span>
-        </div>
-      </div>
-    </div>
+  <div class="stat reveal"><div class="stat-n">12</div><div class="stat-l">Linode VPS Fleets</div>[span_26](start_span)[span_26](end_span)</div>
+  <div class="stat-n stat reveal" style="display:block;border:none;">
+    <div class="stat-n">48+</div><div class="stat-l">Hosted Apps</div>[span_27](start_span)[span_27](end_span)
   </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- PROJECTS -->
-<section id="projects">
-  <div class="wrap">
-    <div class="sec-eyebrow reveal">03 · Projects</div>
-    <h2 class="sec-title reveal">Notable Builds</h2>
-    <p class="sec-sub reveal">Real production systems designed, built, and maintained from scratch.</p>
-    <div class="proj-grid">
-
-      <div class="proj-card big reveal">
-        <div>
-          <div class="proj-num">PROJECT_01 · FEATURED</div>
-          <h3 class="proj-title">Prometheus / Grafana Observability Stack</h3>
-          <p class="proj-desc">Architected full end-to-end monitoring from scratch across 12 Linode VPS servers hosting 48+ apps. Built 24-panel Grafana dashboards covering CPU/memory, container health, disk I/O, and network traffic. Integrated Loki + Promtail for centralized log aggregation. Configured Alertmanager with Telegram bot for real-time alerts — DoS detection, brute-force login, scanner/bot activity, and service downtime. Resolved Promtail position file conflicts and tuned alert thresholds to eliminate noise.</p>
-          <div class="proj-tags">
-            <span class="tag v">Prometheus</span><span class="tag v">Grafana</span><span class="tag">Loki</span><span class="tag">Promtail</span><span class="tag">Alertmanager</span><span class="tag">Telegram API</span><span class="tag">Linux</span>
-          </div>
-        </div>
-        <div class="proj-visual">
-          <div style="color:var(--g1)">● STACK HEALTHY</div>
-          <div style="color:var(--muted2)">────────────────────</div>
-          <div><span style="color:var(--p1)">cpu_usage  </span><span style="color:var(--p3)">12.4%</span>  ✓</div>
-          <div><span style="color:var(--p1)">mem_usage  </span><span style="color:var(--p3)">38.1%</span>  ✓</div>
-          <div><span style="color:var(--p1)">containers </span><span style="color:var(--g1)">48/48</span>  ✓</div>
-          <div><span style="color:var(--p1)">brute_force</span><span style="color:var(--g1)"> 0    </span>  ✓</div>
-          <div><span style="color:var(--p1)">dos_detect </span><span style="color:var(--g1)">clean </span>  ✓</div>
-          <div style="color:var(--muted2)">────────────────────</div>
-          <div style="color:var(--p2)">→ Telegram: bot active</div>
-          <div style="color:var(--muted2)">→ Alerts: 0 firing</div>
-        </div>
-      </div>
-
-      <div class="proj-card reveal">
-        <div class="proj-num">PROJECT_02</div>
-        <h3 class="proj-title">GeminiAssistant — FreeScout AI Module</h3>
-        <p class="proj-desc">Built a custom PHP module for FreeScout integrating Google Gemini API directly into the ticket interface. Three AI-powered actions: Suggest Reply (context-aware draft), Summarize (condenses long threads), and Rewrite (polishes tone and clarity). API key and settings stored via FreeScout's native Option system. Loads inline via AJAX to a custom controller endpoint — no page reload.</p>
-        <div class="proj-tags"><span class="tag o">Gemini API</span><span class="tag">PHP</span><span class="tag">FreeScout</span><span class="tag">AJAX</span><span class="tag">REST API</span></div>
-      </div>
-
-      <div class="proj-card reveal">
-        <div class="proj-num">PROJECT_03</div>
-        <h3 class="proj-title">PhishShield — Phishing Awareness Training</h3>
-        <p class="proj-desc">Designed and deployed a phishing awareness platform for ElevateCalls agents on a dedicated subdomain. Built 30 quiz questions across three progressive difficulty levels using real internal company domains and realistic spoofed email formats — training staff to identify suspicious links, sender spoofing, and social engineering tactics.</p>
-        <div class="proj-tags"><span class="tag p">Security Awareness</span><span class="tag">Phishing Simulation</span><span class="tag">Web App</span><span class="tag">Cloudron</span></div>
-      </div>
-
-      <div class="proj-card reveal">
-        <div class="proj-num">PROJECT_04</div>
-        <h3 class="proj-title">3CX Voicemail → Google Chat Pipeline</h3>
-        <p class="proj-desc">Engineered a real-time voicemail notification pipeline: Telnyx fires a webhook to a Node.js/Express server on Nginx, which retrieves the audio file, serves it via public URL, then posts a Google Chat Card V2 message with caller info, timestamp, extension, and playback link. Eliminated the need for agents to log into 3CX to check voicemails.</p>
-        <div class="proj-tags"><span class="tag v">Node.js</span><span class="tag">Telnyx API</span><span class="tag">3CX</span><span class="tag">Google Chat Card V2</span><span class="tag">Nginx</span></div>
-      </div>
-
-      <div class="proj-card reveal">
-        <div class="proj-num">PROJECT_05</div>
-        <h3 class="proj-title">300+ GB IMAP → Google Workspace Migration</h3>
-        <p class="proj-desc">Full IMAP-to-GWS email migration across three brands. Tuned Dovecot for concurrent connections, handled deduplication, coordinated MX cutovers via Cloudflare with zero unplanned downtime. Configured SPF/DKIM/DMARC post-migration and resolved consumer Gmail account conflicts. Produced formal migration reports for each brand.</p>
-        <div class="proj-tags"><span class="tag v">Google Workspace</span><span class="tag">GWMT</span><span class="tag">Dovecot</span><span class="tag">Cloudflare DNS</span><span class="tag">DMARC</span></div>
-      </div>
-
-      <div class="proj-card reveal">
-        <div class="proj-num">PROJECT_06</div>
-        <h3 class="proj-title">Employee Onboarding Automation</h3>
-        <p class="proj-desc">Built a Google Sheets + Apps Script onboarding system supporting 6 staff positions with role-specific 23-task provisioning checklists — covering email, VoIP, software access, VPN, security acknowledgment, and training. On new hire creation, the script auto-generates their checklist, assigns owners, and tracks completion status in real time.</p>
-        <div class="proj-tags"><span class="tag o">Apps Script</span><span class="tag">Google Sheets</span><span class="tag">Automation</span><span class="tag">HR / IT Ops</span></div>
-      </div>
-
-      <div class="proj-card reveal">
-        <div class="proj-num">PROJECT_07</div>
-        <h3 class="proj-title">Microsoft 365 → Google Workspace Migration</h3>
-        <p class="proj-desc">Full M365-to-GWS migration across all four entities. Migrated mailboxes, SharePoint document libraries, and user accounts. Handled Intune device unenrollment, Azure AD deprovisioning, MX cutover via Cloudflare, and post-migration SPF/DKIM/DMARC validation. Zero data loss across all migrated content.</p>
-        <div class="proj-tags"><span class="tag v">Microsoft 365</span><span class="tag v">Google Workspace</span><span class="tag">SharePoint</span><span class="tag">Intune</span><span class="tag">Azure AD</span><span class="tag">Cloudflare</span></div>
-      </div>
-
-      <div class="proj-card reveal">
-        <div class="proj-num">PROJECT_08</div>
-        <h3 class="proj-title">Bitdefender GravityZone Endpoint Deployment</h3>
-        <p class="proj-desc">Deployed GravityZone across all WFH endpoints. Configured antivirus scanning with scheduled scans, real-time protection, and auto-quarantine rules. Implemented WAC time-based Content Control policies — blocking social media and streaming (Facebook, TikTok, YouTube) specifically during working hours, allowing access outside shift times.</p>
-        <div class="proj-tags"><span class="tag p">Bitdefender GravityZone</span><span class="tag">WAC Scheduler</span><span class="tag">Content Control</span><span class="tag">Web Filtering</span></div>
-      </div>
-
-      <div class="proj-card reveal">
-        <div class="proj-num">PROJECT_09</div>
-        <h3 class="proj-title">Kickidler DLP — Data Loss Prevention</h3>
-        <p class="proj-desc">Deployed Kickidler DLP across 20+ office computers. Configured DLP policies detecting and blocking unauthorized file transfers, USB usage, and data exfiltration. Set up activity tracking including screenshots, app usage logs, and internet activity monitoring for compliance. Managed admin console for policy assignment, alerting, and report generation.</p>
-        <div class="proj-tags"><span class="tag p">Kickidler DLP</span><span class="tag">DLP Policies</span><span class="tag">Activity Monitoring</span><span class="tag">USB Control</span><span class="tag">Insider Threat</span></div>
-      </div>
-
-      <div class="proj-card reveal">
-        <div class="proj-num">PROJECT_10</div>
-        <h3 class="proj-title">Tailscale VPN — Zero Trust Remote Access</h3>
-        <p class="proj-desc">Set up Tailscale VPN for secure encrypted tunneling to on-premise office computers without opening public firewall ports. Enrolled office endpoints, configured ACLs to restrict which users can reach which machines, and enabled remote desktop access for IT administration — no exposed RDP or SSH ports.</p>
-        <div class="proj-tags"><span class="tag g">Tailscale</span><span class="tag">Zero Trust</span><span class="tag">ACL Config</span><span class="tag">Remote Access</span><span class="tag">Endpoint Security</span></div>
-      </div>
-
-      <div class="proj-card reveal">
-        <div class="proj-num">PROJECT_11</div>
-        <h3 class="proj-title">ScribeHow IT Documentation Library</h3>
-        <p class="proj-desc">Built a company-wide IT documentation library using ScribeHow across all three brands. Created auto-captured step-by-step guides for onboarding, software setup, VoIP provisioning, GWS admin tasks, FreeScout operations, and security procedures. Living documents that update when processes change — reduced onboarding time and support tickets.</p>
-        <div class="proj-tags"><span class="tag o">ScribeHow</span><span class="tag">SOPs</span><span class="tag">Onboarding Guides</span><span class="tag">Knowledge Base</span></div>
-      </div>
-
-      <div class="proj-card reveal">
-        <div class="proj-num">PROJECT_12</div>
-        <h3 class="proj-title">Twilio — Audio, SMS & WhatsApp Setup</h3>
-        <p class="proj-desc">Set up and configured Twilio as a unified communications platform covering audio calls, SMS, and WhatsApp Business messaging. Handled number provisioning, messaging service configuration, webhook endpoint setup for inbound/outbound events, and API-based communication flows integrated with existing company systems. Enabled agents to send and receive messages and calls through a single managed platform.</p>
-        <div class="proj-tags"><span class="tag g">Twilio</span><span class="tag">Audio Calls</span><span class="tag">SMS</span><span class="tag">WhatsApp Business</span><span class="tag">Webhooks</span><span class="tag">API Integration</span><span class="tag">Number Provisioning</span></div>
-      </div>
-
-      <div class="proj-card reveal">
-        <div class="proj-num">PROJECT_13</div>
-        <h3 class="proj-title">VirtualBox Lab Environment</h3>
-        <p class="proj-desc">Maintain VirtualBox VM environments for testing, staging, and IT lab purposes. Used to safely test OS configurations, server setups, software deployments, and network scenarios before production rollout. Created snapshots for quick rollback, configured NAT and bridged networking, and tested Windows Server and Linux distro compatibility.</p>
-        <div class="proj-tags"><span class="tag g">VirtualBox</span><span class="tag">VM Snapshots</span><span class="tag">NAT / Bridged</span><span class="tag">Lab Environment</span><span class="tag">Windows Server</span></div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- EXPERIENCE -->
-<section id="experience">
-  <div class="wrap">
-    <div class="sec-eyebrow reveal">04 · Experience</div>
-    <h2 class="sec-title reveal">Work History</h2>
-    <div class="exp-list">
-
-      <div class="exp-row reveal">
-        <div class="exp-left">
-          <div class="exp-date">Nov 2025 – Present</div>
-          <div class="exp-badge remote">Remote</div>
-        </div>
-        <div>
-          <div class="exp-co">Gosafer Corp · GoSafer Security · ElevateCalls · DocDX</div>
-          <div class="exp-role">Systems Administrator / IT Specialist</div>
-          <ul class="exp-buls">
-            <li>Manage 12 Linode VPS servers hosting 48+ self-hosted apps via Cloudron across three brand domains</li>
-            <li>Architected Prometheus/Grafana/Loki observability stack with Telegram alerting from scratch</li>
-            <li>Led M365 → Google Workspace migration including SharePoint, email, Intune unenrollment, and MX cutover</li>
-            <li>Deployed Kickidler DLP across 20+ office computers with DLP policies, USB controls, and activity monitoring</li>
-            <li>Set up Tailscale VPN for zero-trust remote tunneling to on-premise office endpoints</li>
-            <li>Built ScribeHow IT documentation library and workflow guides for all three brands</li>
-            <li>Deployed Bitdefender GravityZone; configured WAC schedule-based website blocking for all WFH users</li>
-            <li>Set up and configured Twilio for audio calls, SMS, and WhatsApp messaging — number provisioning, messaging services, webhook integrations, and API-based communication flows</li>
-            <li>Administer 3CX PBX and Telnyx SIP; handled SIP incident response and toll fraud remediation</li>
-            <li>Built GeminiAssistant FreeScout AI module and PhishShield phishing training platform</li>
-            <li>Develop Bash/Python automation, n8n workflows, and cross-platform webhook integrations</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="exp-row reveal">
-        <div class="exp-left">
-          <div class="exp-date">Jun 2024 – Oct 2025</div>
-          <div class="exp-badge onsite">Onsite</div>
-        </div>
-        <div>
-          <div class="exp-co">OCAI Tech Solutions</div>
-          <div class="exp-role">IT Supervisor</div>
-          <ul class="exp-buls">
-            <li>Oversaw IT operations: infrastructure, helpdesk, VoIP (Vicci, RingCentral), and network administration</li>
-            <li>Administered Active Directory, Microsoft 365, Google Workspace, and Microsoft Intune</li>
-            <li>Configured VPNs, VLANs, firewalls; conducted IT audits and asset tracking</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="exp-row reveal">
-        <div class="exp-left">
-          <div class="exp-date">Feb 2024 – Jun 2024</div>
-          <div class="exp-badge onsite">Onsite</div>
-        </div>
-        <div>
-          <div class="exp-co">SPLACE BPO</div>
-          <div class="exp-role">IT Support Intern</div>
-          <ul class="exp-buls">
-            <li>Active Directory and Google Workspace account management, software installation, asset inventory</li>
-            <li>Firewall monitoring and basic network security tasks</li>
-          </ul>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section id="contact">
-  <div class="wrap">
-    <div class="contact-wrap">
-      <div>
-        <div class="sec-eyebrow reveal">05 · Contact</div>
-        <h2 class="sec-title reveal">Let's Connect</h2>
-        <p class="sec-sub reveal" style="margin-bottom:0">Open to Systems Administrator, IT Specialist, DevOps, and IT Operations roles. Based in Compostela, Philippines — remote-ready.</p>
-      </div>
-      <div class="contact-links">
-        <a href="mailto:jerdennden@gmail.com" class="c-link reveal">
-          <div class="c-ico">✉️</div>
-          <div><div class="c-label">Email</div><div class="c-val">jerdennden@gmail.com</div></div>
-        </a>
-        <a href="tel:+639455412337" class="c-link reveal">
-          <div class="c-ico">📱</div>
-          <div><div class="c-label">Phone</div><div class="c-val">+63 945 541 2337</div></div>
-        </a>
-        <a href="https://www.linkedin.com/in/jerdenn-calag-70a075282/" target="_blank" class="c-link reveal">
-          <div class="c-ico">💼</div>
-          <div><div class="c-label">LinkedIn</div><div class="c-val">linkedin.com/in/jerdenn-calag</div></div>
-        </a>
-        <a href="https://jerdenncalag.github.io/jerdenn-calag.github.io/" target="_blank" class="c-link reveal">
-          <div class="c-ico">🌐</div>
-          <div><div class="c-label">Portfolio</div><div class="c-val">jerdenncalag.github.io</div></div>
-        </a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer>
-  <div class="ft">© 2025 <span>Jerdenn Calag</span> · Systems Administrator · Compostela, PH</div>
-  <div class="ft">Built with HTML/CSS · <span>GitHub Pages</span></div>
-</footer>
-
-<script>
-  const els = document.querySelectorAll('.reveal');
-  const obs = new IntersectionObserver(es => es.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); }), {threshold:0.1});
-  els.forEach(el => obs.observe(el));
-</script>
-</body>
-</html>
+  <div class="stat reveal"><div class="stat-n">300+</div><div class="stat-l">G
